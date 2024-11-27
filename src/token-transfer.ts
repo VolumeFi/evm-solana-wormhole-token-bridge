@@ -11,7 +11,7 @@ import { getSigner, waitLog } from "./helpers/index";
 type NetworkType = "Mainnet" | "Testnet";
 type ChainName = "Solana" | "Ethereum" | "Terra" | "Bsc" | "Polygon" | "Avalanche" | "Oasis" | "Algorand" | "Aurora" | "Fantom" | "Karura" | "Acala" | "Klaytn" | "Celo" | "Near" | "Moonbeam" | "Neon" | "Terra2" | "Injective" | "Osmosis" | "Sui" | "Aptos" | "Arbitrum" | "Optimism" | "Gnosis" | "Pythnet" | "Xpla" | "Btc" | "Base" | "Sei" | "Rootstock" | "Scroll" | "Mantle" | "Blast" | "Xlayer" | "Linea" | "Berachain" | "Seievm" | "Snaxchain" | "Wormchain" | "Cosmoshub" | "Evmos" | "Kujira" | "Neutron" | "Celestia" | "Stargaze" | "Seda" | "Dymension" | "Provenance" | "Sepolia" | "ArbitrumSepolia" | "BaseSepolia" | "OptimismSepolia" | "Holesky" | "PolygonSepolia";
 
-async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiverChain: ChainName, tokenAddress: string, tokenAmount: string): Promise<void> {
+async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiverChain: ChainName, tokenAddress: string, tokenAmount: string, recoverTxId: undefined | string): Promise<void> {
     // Init Wormhole object, passing config for which network
     // to use (e.g. Mainnet/Testnet) and what Platforms to support
     // const wh = await wormhole("Testnet", [evm, solana]);
@@ -70,7 +70,7 @@ async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiv
 
     // Set this to the transfer txid of the initiating transaction to recover a token transfer
     // and attempt to fetch details about its progress.
-    let recoverTxid = undefined;
+    let recoverTxid = recoverTxId;
     // recoverTxid = "0xa4e0a2c1c994fe3298b5646dfd5ce92596dc1a589f42e241b7f07501a5a5a39f";
 
     // Finally create and perform the transfer given the parameters set above
@@ -172,4 +172,4 @@ async function tokenTransfer<N extends Network>(
     });
 }
 
-transfer(<NetworkType>process.argv[2], <ChainName>process.argv[3], <ChainName>process.argv[4], process.argv[5], process.argv[6]);
+transfer(<NetworkType>process.argv[2], <ChainName>process.argv[3], <ChainName>process.argv[4], process.argv[5], process.argv[6], process.argv[7]);
