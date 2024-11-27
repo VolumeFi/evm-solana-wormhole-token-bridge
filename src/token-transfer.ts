@@ -8,20 +8,23 @@ import solana from "@wormhole-foundation/sdk/solana";
 import type { SignerStuff } from "./helpers/index";
 import { getSigner, waitLog } from "./helpers/index";
 
-(async function () {
+type NetworkType = "Mainnet" | "Testnet";
+type ChainName = "Solana" | "Ethereum" | "Terra" | "Bsc" | "Polygon" | "Avalanche" | "Oasis" | "Algorand" | "Aurora" | "Fantom" | "Karura" | "Acala" | "Klaytn" | "Celo" | "Near" | "Moonbeam" | "Neon" | "Terra2" | "Injective" | "Osmosis" | "Sui" | "Aptos" | "Arbitrum" | "Optimism" | "Gnosis" | "Pythnet" | "Xpla" | "Btc" | "Base" | "Sei" | "Rootstock" | "Scroll" | "Mantle" | "Blast" | "Xlayer" | "Linea" | "Berachain" | "Seievm" | "Snaxchain" | "Wormchain" | "Cosmoshub" | "Evmos" | "Kujira" | "Neutron" | "Celestia" | "Stargaze" | "Seda" | "Dymension" | "Provenance" | "Sepolia" | "ArbitrumSepolia" | "BaseSepolia" | "OptimismSepolia" | "Holesky" | "PolygonSepolia";
+
+async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiverChain: ChainName, tokenAddress: string, tokenAmount: string): Promise<void> {
     // Init Wormhole object, passing config for which network
     // to use (e.g. Mainnet/Testnet) and what Platforms to support
     // const wh = await wormhole("Testnet", [evm, solana]);
-    const wh = await wormhole("Mainnet", [evm, solana]);
+    const wh = await wormhole(netowrkType, [evm, solana]);
 
     // Grab chain Contexts -- these hold a reference to a cached rpc client
     // const sendChain = wh.getChain("Avalanche");
-    const sendChain = wh.getChain("Solana");
-    const rcvChain = wh.getChain("Base");
+    const sendChain = wh.getChain(senderChain);
+    const rcvChain = wh.getChain(receiverChain);
 
     // Shortcut to allow transferring native gas token
     // const token = Wormhole.tokenId(sendChain.chain, "native");
-    const token = Wormhole.tokenId(sendChain.chain, "AH3g889eGTV1qwaLmbiGrmYEbbK8pcaPjnd4TxUrCCsZ");
+    const token = Wormhole.tokenId(sendChain.chain, tokenAddress);
 
     // A TokenId is just a `{chain, address}` pair and an alias for ChainAddress
     // The `address` field must be a parsed address.
@@ -37,7 +40,7 @@ import { getSigner, waitLog } from "./helpers/index";
     // Note: The Token bridge will dedust past 8 decimals
     // this means any amount specified past that point will be returned
     // to the caller
-    const amt = "1";
+    const amt = tokenAmount;
 
     // With automatic set to true, perform an automatic transfer. This will invoke a relayer
     // contract intermediary that knows to pick up the transfers
@@ -97,7 +100,7 @@ import { getSigner, waitLog } from "./helpers/index";
 
     // Log out the results
     console.log(receipt);
-})();
+};
 
 async function tokenTransfer<N extends Network>(
     wh: Wormhole<N>,
@@ -168,3 +171,5 @@ async function tokenTransfer<N extends Network>(
         destination: route.source,
     });
 }
+
+transfer(<NetworkType>process.argv[2], <ChainName>process.argv[3], <ChainName>process.argv[4], process.argv[5], process.argv[6]);

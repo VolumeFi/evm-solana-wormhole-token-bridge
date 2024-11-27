@@ -42,3 +42,8 @@ amount: the token amount to bridge token
 npm run transfer [network_type] [send_chain_id] [receive_chain_id] [token_address] [amount]
 ```
 
+e.g.
+```bash
+npm run transfer Mainnet Base Solana 0x1eD7d3c06190048CF9DCCd578Ca6B84B93BCa543 1
+```
+
