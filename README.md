@@ -29,6 +29,36 @@ cd evm-solana-wormhole-token-bridge.git
 npm install
 ```
 
+## Token Registeration
+
+### Create Attestation & Register Token
+
+network_type: Mainnet | Testnet
+
+chain_id: "Solana" | "Ethereum" | "Terra" | "Bsc" | "Polygon" | "Avalanche" | "Oasis" | "Algorand" | "Aurora" | "Fantom" | "Karura" | "Acala" | "Klaytn" | "Celo" | "Near" | "Moonbeam" | "Neon" | "Terra2" | "Injective" | "Osmosis" | "Sui" | "Aptos" | "Arbitrum" | "Optimism" | "Gnosis" | "Pythnet" | "Xpla" | "Btc" | "Base" | "Sei" | "Rootstock" | "Scroll" | "Mantle" | "Blast" | "Xlayer" | "Linea" | "Berachain" | "Seievm" | "Snaxchain" | "Wormchain" | "Cosmoshub" | "Evmos" | "Kujira" | "Neutron" | "Celestia" | "Stargaze" | "Seda" | "Dymension" | "Provenance" | "Sepolia" | "ArbitrumSepolia" | "BaseSepolia" | "OptimismSepolia" | "Holesky" | "PolygonSepolia"
+
+token_address: "native" | token contract address
+
+```bash
+npm run register [network_type] [origin_chain_id] [token_address] [destination_chain_id]
+```
+
+e.g.
+```bash
+npm run register Mainnet Base 0xD6E2433eFeEA4b7711e6D98Ed108E40956E90e30 Ethereum
+```
+
+### Recover Attestation
+
+```bash
+npm run register [network_type] [origin_chain_id] [token_address] [destination_chain_id] [token_attestation_tx_id]
+```
+
+e.g.
+```bash
+npm run register Mainnet Base 0xD6E2433eFeEA4b7711e6D98Ed108E40956E90e30 Ethereum 0x03aa532d53b9106ee5f10e39789f242ab64e63743c09483ebef00cd5bd75e37d
+```
+
 ## Running Transfers
 
 ### Token Transfer
