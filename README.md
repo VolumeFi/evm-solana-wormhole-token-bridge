@@ -67,12 +67,12 @@ network_type: Mainnet | Testnet
 
 chain_id: "Solana" | "Ethereum" | "Terra" | "Bsc" | "Polygon" | "Avalanche" | "Oasis" | "Algorand" | "Aurora" | "Fantom" | "Karura" | "Acala" | "Klaytn" | "Celo" | "Near" | "Moonbeam" | "Neon" | "Terra2" | "Injective" | "Osmosis" | "Sui" | "Aptos" | "Arbitrum" | "Optimism" | "Gnosis" | "Pythnet" | "Xpla" | "Btc" | "Base" | "Sei" | "Rootstock" | "Scroll" | "Mantle" | "Blast" | "Xlayer" | "Linea" | "Berachain" | "Seievm" | "Snaxchain" | "Wormchain" | "Cosmoshub" | "Evmos" | "Kujira" | "Neutron" | "Celestia" | "Stargaze" | "Seda" | "Dymension" | "Provenance" | "Sepolia" | "ArbitrumSepolia" | "BaseSepolia" | "OptimismSepolia" | "Holesky" | "PolygonSepolia"
 
-token_address: "native" | token contract address
+registered_token_address: "native" | send_chain's token contract address
 
 amount: the token amount to bridge token
 
 ```bash
-npm run transfer [network_type] [send_chain_id] [receive_chain_id] [token_address] [amount]
+npm run transfer [network_type] [send_chain_id] [receive_chain_id] [registered_token_address] [amount]
 ```
 
 e.g.
@@ -85,7 +85,7 @@ npm run transfer Mainnet Base Solana 0x1eD7d3c06190048CF9DCCd578Ca6B84B93BCa543 
 We need this command if you tried to send token but failed on VAA step.
 
 ```bash
-npm run transfer [network_type] [send_chain_id] [receive_chain_id] [token_address] [amount] [token_transfer_tx_id]
+npm run transfer [network_type] [send_chain_id] [receive_chain_id] [registered_token_address] [amount] [token_transfer_tx_id]
 ```
 
 e.g.
