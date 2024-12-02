@@ -13,8 +13,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@ethersproject/hardware-wallets": "^5.7.0",
+    "@ledgerhq/hw-transport-webusb": "^6.29.4",
+    "@solana/wallet-adapter-ledger": "^0.9.25",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/web3.js": "^1.95.5",
     "@wormhole-foundation/sdk": "^0.10.9",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4"
   },
   "devDependencies": {
     "tsx": "^4.19.0"
