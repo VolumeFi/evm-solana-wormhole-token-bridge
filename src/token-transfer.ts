@@ -101,11 +101,12 @@ async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiv
     // Log out the results
     console.log("WaitLog", receipt);
 
-    // 3) Redeem the VAA on the dest chain
-    console.log("Completing Transfer");
-    const destTxids = await xfer.completeTransfer(destination.signer);
-    console.log(`Completed Transfer: `, destTxids);
-    // EXAMPLE_TOKEN_TRANSFER
+    if (recoverTxId) {
+        // 3) Redeem the VAA on the dest chain
+        console.log("Completing Transfer");
+        const destTxids = await xfer.completeTransfer(destination.signer);
+        console.log(`Completed Transfer: `, destTxids);
+    }
 };
 
 async function tokenTransfer<N extends Network>(
