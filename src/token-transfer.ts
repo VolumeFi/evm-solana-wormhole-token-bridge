@@ -94,12 +94,18 @@ async function transfer(netowrkType: NetworkType, senderChain: ChainName, receiv
         await TokenTransfer.from(wh, {
             chain: source.chain.chain,
             txid: recoverTxid,
-        });
+        }, 1200_000);
 
     const receipt = await waitLog(wh, xfer);
 
     // Log out the results
-    console.log(receipt);
+    console.log("WaitLog", receipt);
+
+    // 3) Redeem the VAA on the dest chain
+    console.log("Completing Transfer");
+    const destTxids = await xfer.completeTransfer(destination.signer);
+    console.log(`Completed Transfer: `, destTxids);
+    // EXAMPLE_TOKEN_TRANSFER
 };
 
 async function tokenTransfer<N extends Network>(
@@ -150,7 +156,7 @@ async function tokenTransfer<N extends Network>(
 
     // 2) Wait for the VAA to be signed and ready (not required for auto transfer)
     console.log("Getting Attestation");
-    const attestIds = await xfer.fetchAttestation(60000);
+    const attestIds = await xfer.fetchAttestation(1200_000);
     console.log(`Got Attestation: `, attestIds);
 
     // 3) Redeem the VAA on the dest chain
